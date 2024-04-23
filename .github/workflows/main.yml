@@ -1,0 +1,26 @@
+name: Preetika workflow
+on:
+  workflow_dispatch:
+    inputs:
+      image-choice:
+        description: 'Select any of the options below to pull the required image'
+        type: choice
+        default: 'ubuntu'
+        options:
+          - 'friendica'
+          - 'mongo'
+          - 'php'
+          - 'anchore'
+          - 'Ddosify'
+jobs:
+  pull-and-run-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Pull Docker image
+        run: docker pull ${{ github.event.inputs.image-choice }}
+
+
+
+
